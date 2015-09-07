@@ -80,8 +80,11 @@
         Channel *channel=[self.channels objectAtIndex:indexPath.row];
         cell.textLabel.text=channel.name;
         
-        NSString *channel_id=[[NSUserDefaults standardUserDefaults] objectForKey:@"channel_id"];
-        if ([channel.channel_id isEqualToString:channel_id])
+        User *user = [User sharedUser];
+        if (user.channel_id.length == 0) {
+            user.channel_id = @"0";
+        }
+        if ([channel.channel_id isEqualToString:user.channel_id])
         {
             cell.backgroundColor = [UIColor colorWithRed:0.92 green:0.26 blue:0.21 alpha:0.4];
         }
